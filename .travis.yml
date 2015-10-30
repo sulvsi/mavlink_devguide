@@ -8,10 +8,9 @@ before_script:
 - gitbook install
 #- grunt
 - gem install dotenv aws-sdk thread bundler git mime
-- gitbook build
 after_success:
-- |
-  ./deploy.rb
+- gitbook build
+- ./deploy.rb -o=_book
 matrix:
   fast_finish: true
 env:
