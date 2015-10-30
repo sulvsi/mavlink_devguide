@@ -1,0 +1,27 @@
+{
+  "title": "MAVLink Development Guide",
+  "description": "Guide for MAVLink protocol development",
+  "plugins":[
+    "scrollablecode",
+    "anchors",
+    "-mathjax",
+    "image-captions",
+    "mermaid-2",
+    "youtube",
+    "redirect",
+    "mathjax"
+  ],
+  "pluginsConfig": {
+      "mermaid-2": {
+         "theme": "forest"
+      }
+    },
+  "links": {
+    "sharing": {
+      "google": true,
+      "facebook": true,
+      "twitter": true,
+      "all": false
+    }
+  }
+}
