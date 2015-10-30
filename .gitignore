@@ -32,3 +32,6 @@ _book
 
 # Mac Os
 .DS_Store
+
+# Travis output
+build

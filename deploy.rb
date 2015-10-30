@@ -103,7 +103,8 @@ end
 # Parse CLI Options
 options = {
   :bucket     => ENV['BUCKET'],
-  :build_dir  => ENV['DIRECTORY'],
+  :input_dir  => '.',
+  :build_dir  => 'build',
   :threads    => 8,
   :force      => false,
   :branch     => 'master',
@@ -114,6 +115,10 @@ options = {
 parser = OptionParser.new do |opts|
   opts.on('-b', '--bucket=BUCKET', "S3 Bucket to deploy to (Required, default: \"#{options[:bucket]}\")") do |b|
     options[:bucket] = b
+  end
+
+  opts.on('-i', '--input_dir=DIRECTORY', "Input directory (Default: \"#{options[:input_dir]}\")") do |i|
+    options[:input_dir] = i
   end
 
   opts.on('-o', '--output_dir=DIRECTORY', "Build directory (Default: \"#{options[:build_dir]}\")") do |o|
@@ -167,7 +172,7 @@ end
 # end
 
 # Build book
-abort 'Failed to build book!' unless system 'gitbook', 'build', 'book', options[:build_dir], '--format', 'website'
+abort 'Failed to build book!' unless system 'gitbook', 'build', options[:input_dir], options[:build_dir], '--format', 'website'
 
 # Strip double slashes
 gitbook_css = File.join(options[:build_dir], 'gitbook', '*.css')
