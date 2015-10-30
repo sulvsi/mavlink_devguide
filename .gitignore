@@ -26,3 +26,9 @@ node_modules
 
 # vim swapfile
 *.swp
+
+# Book
+_book
+
+# Mac Os
+.DS_Store
