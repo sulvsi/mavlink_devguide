@@ -3,7 +3,7 @@ sudo: false
 node_js:
 - "4.1"
 before_script:
-- npm install -g grunt-cli gitbook-cli
+- npm install grunt-cli gitbook-cli svgexport -g
 #- npm install
 - gitbook install
 #- grunt
