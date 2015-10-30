@@ -32,11 +32,11 @@ class S3FolderUpload
   # Examples
   #   => uploader = S3FolderUpload.new("some_route/test_folder", 'your_bucket_name')
   #
-  def initialize(folder_path, bucket, aws_key, aws_secret)
+  def initialize(folder_path, bucket, in_region, aws_key, aws_secret)
     @folder_path       = folder_path
     @files             = Dir.glob "#{folder_path}/**/{*,.*}"
     @total_files       = files.length
-    @connection        = Aws::S3::Resource.new(region: 'us-east-1', access_key_id: aws_key, secret_access_key: aws_secret)
+    @connection        = Aws::S3::Resource.new(region: in_region, access_key_id: aws_key, secret_access_key: aws_secret)
     @s3_bucket         = @connection.bucket(bucket)
   end
 
@@ -103,6 +103,7 @@ end
 # Parse CLI Options
 options = {
   :bucket     => ENV['BUCKET'],
+  :region     => 'us-east-1',
   :input_dir  => '.',
   :build_dir  => 'build',
   :threads    => 8,
@@ -115,6 +116,10 @@ options = {
 parser = OptionParser.new do |opts|
   opts.on('-b', '--bucket=BUCKET', "S3 Bucket to deploy to (Required, default: \"#{options[:bucket]}\")") do |b|
     options[:bucket] = b
+  end
+
+  opts.on('-r', '--region=REGION', "S3 Bucket to deploy to (Required, default: \"#{options[:region]}\")") do |r|
+    options[:region] = r
   end
 
   opts.on('-i', '--input_dir=DIRECTORY', "Input directory (Default: \"#{options[:input_dir]}\")") do |i|
@@ -191,7 +196,7 @@ Dir.glob gitbook_css do |css|
 end
 
 # Deploy
-uploader = S3FolderUpload.new(options[:build_dir], options[:bucket], options[:aws_key], options[:aws_secret])
+uploader = S3FolderUpload.new(options[:build_dir], options[:bucket], options[:region], options[:aws_key], options[:aws_secret])
 uploader.upload! options[:threads]
 uploader.cleanup!
 

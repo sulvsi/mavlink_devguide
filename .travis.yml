@@ -9,7 +9,7 @@ before_script:
 #- grunt
 - gem install dotenv aws-sdk thread bundler git mime
 after_success:
-- ./deploy.rb -o=_book
+- ./deploy.rb -obuild -rus-west-2
 matrix:
   fast_finish: true
 env:
