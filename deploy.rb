@@ -103,12 +103,12 @@ end
 # Parse CLI Options
 options = {
   :bucket     => ENV['BUCKET'],
-  :build_dir  => 'build',
+  :build_dir  => ENV['DIRECTORY'],
   :threads    => 8,
   :force      => false,
   :branch     => 'master',
-  :aws_key    => ENV['AWS_KEY'],
-  :aws_secret => ENV['AWS_SECRET']
+  :aws_key    => ENV['KEY'],
+  :aws_secret => ENV['SECRET']
 }
 
 parser = OptionParser.new do |opts|
