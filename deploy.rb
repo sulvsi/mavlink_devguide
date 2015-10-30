@@ -107,8 +107,8 @@ options = {
   :threads    => 8,
   :force      => false,
   :branch     => 'master',
-  :aws_key    => ENV['KEY'],
-  :aws_secret => ENV['SECRET']
+  :aws_key    => ENV['AWS_KEY'],
+  :aws_secret => ENV['AWS_SECRET']
 }
 
 parser = OptionParser.new do |opts|
